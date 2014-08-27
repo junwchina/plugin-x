@@ -30,6 +30,12 @@ if [ ! -f $BUILD_PATH_FILE_NAME ];then
     # read android ndk path from user input
     while true
     do
+        if [ -n "$ANDROID_NDK_ROOT" ]; then 
+            ANDROID_NDK_PATH=$ANDROID_NDK_ROOT
+            echo "Get ANDROID_NDK_ROOT=$ANDROID_NDK_PATH"
+            break
+        fi
+
         echo "Please input the android-ndk path:"
         read ANDROID_NDK_PATH
         ANDROID_NDK_PATH="$(changeDirFormat ${ANDROID_NDK_PATH})"
@@ -44,6 +50,13 @@ if [ ! -f $BUILD_PATH_FILE_NAME ];then
     # read android sdk path from user input
     while true
     do
+        if [ -n $ANDROID_SDK_ROOT ]; then 
+            ANDROID_SDK_PATH=${ANDROID_SDK_ROOT}
+            INPUT_SDK_PATH=${ANDROID_SDK_PATH}
+            echo "Get ANDROID_SDK_ROOT=$ANDROID_SDK_PATH"
+            break
+        fi
+
         echo "Please input the andoid-sdk path:"
         read ANDROID_SDK_PATH
         INPUT_SDK_PATH=${ANDROID_SDK_PATH}
@@ -58,6 +71,12 @@ if [ ! -f $BUILD_PATH_FILE_NAME ];then
 
     while true
     do
+        ANT_PATH=$(dirname $(which ant))
+        if [ $? -eq 0 ]; then 
+            echo "Get ANT_PATH=$ANT_PATH"
+            break
+        fi
+
         echo "Please input the ant tool path(such as '/Users/MyAccount/tools/ant/bin'):"
         read ANT_PATH
         ANT_PATH="$(changeDirFormat ${ANT_PATH})"
