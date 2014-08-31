@@ -24,6 +24,8 @@ getStaticModuleName()
 if [ -f ${MK_FILE_PATH} ]; then
     ADD_MODULE_STR=""
     ADD_IMPORT_STR=""
+    ADD_IMPORT_PATH_STR='$(call import-add-path,$(LOCAL_PATH)/../../cocos2d/plugin/publish)'
+
     for plugin_name in ${SELECTED_PLUGINS[@]}
     do
         PLUGIN_MK_FILE=${TARGET_ROOT}/${plugin_name}/android/Android.mk
@@ -53,12 +55,23 @@ if [ -f ${MK_FILE_PATH} ]; then
         fi
     done
 
+
     # Modify the mk file if necessary
     if [ "${ADD_MODULE_STR}" ]; then
         gawk '
             {
+                
                 ModuleStr="'"$ADD_MODULE_STR"'";
                 ImportStr="'"$ADD_IMPORT_STR"'";
+                ImportPathStr="'"$ADD_IMPORT_PATH_STR"'";
+                if (match($0, /^([\s]*[^#]*)include[ \t]+\$\(CLEAR_VARS\)/))
+                {
+                  printf "%s\n\n", $0;
+                  printf "%s\n",ImportPathStr;
+                } else
+                if (match($0, /.*plugin\/publish\)/))
+                {
+                } else
                 if (match($0, /^([\s]*[^#]*)LOCAL_WHOLE_STATIC_LIBRARIES/) && ! PROC1)
                 {
                     PROC1 = 1;

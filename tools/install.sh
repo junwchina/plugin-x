@@ -76,9 +76,10 @@ fi
 
 plugin_arr=(${plugins// /:})
 plugin_with_prefix_arr=()
-for i in {0..${#plugin_arr[@]}}
+for i in $(seq 1 ${#plugin_arr[@]})
 do 
-  plugin-with_prefix_err[i]=plugins/${plugin_arr[$((i++))]}
+  index=$(($i - 1))
+  plugin_with_prefix_arr[$index]="plugins/${plugin_arr[$index]}"
 done
 
 plugin_with_prefix=${plugin_with_prefix_arr[@]}
