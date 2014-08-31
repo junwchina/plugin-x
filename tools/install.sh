@@ -74,4 +74,12 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-./toolsForGame/addPluginForGame.sh ${project_path} ${plugins}
+plugin_arr=(${plugins// /:})
+plugin_with_prefix_arr=()
+for i in {1..${#plugin_arr[@]}}
+do 
+  plugin-with_prefix_err[i]=plugin/${plugin_arr[i]}
+done
+
+plugin_with_prefix=${plugin_with_prefix_arr[@]}
+./toolsForGame/addPluginForGame.sh ${project_path} ${plugin_with_prefix// /:}
