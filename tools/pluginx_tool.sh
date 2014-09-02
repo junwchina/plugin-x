@@ -58,7 +58,7 @@ install_sdk()
   fi
 
   if [ -n "$project_ios_dir" ]; then
-    ./toolsForGame/addPluginForIOS ${PROJECT_DIR}/proj.
+    ./toolsForGame/addPluginForIOS.sh ${project_ios_dir} ${plugin_with_prefix// /:}
   else 
     echo "Error: There is no ios project!!!"
   fi
@@ -77,6 +77,7 @@ OPTIONS:
    -a      action name. [setup |install_sdk]
    -l      list all plugins
    -s      sdk names. such as admob:googleanalytics:flurry
+   -p      project path
    -v      Verbose
 EOF
 
@@ -115,8 +116,8 @@ done
 
 if [ ${action} = "setup" -a -n "${PROJECT_DIR}" ]; then 
   setup
-elif [ ${OPTARG} = "install_sdk" -a -n "${PLUGIN_LIST}" -a -n "${PROJECT_DIR}" ]; then
-  echo "install sdk"
+elif [ "${action}" = "install_sdk" -a -n "${PLUGIN_LIST}" -a -n "${PROJECT_DIR}" ]; then
+  install_sdk
 else
   help
 fi
