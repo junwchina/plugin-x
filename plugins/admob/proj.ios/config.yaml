@@ -1,0 +1,24 @@
+default: &default
+    sdk_dependencies: 
+        - SystemConfiguration.framework
+        - SystemConfiguration.framework 
+        - StoreKit.framework
+        - GameController.framework 
+        - CoreData.framework
+
+    dev_dependencies: 
+        - CoreTelephony.framework 
+        - AdSupport.framework
+        - MessageUI.framework 
+        - MediaPlayer.framework
+
+production:
+    <<: *default
+
+sandbox: 
+    <<: *default
+
+
+
+
+

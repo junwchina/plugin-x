@@ -14,7 +14,7 @@ SELECTED_PLUGINS=(${2//:/ })
 
 pushd ${SHELL_DIR}/../
 
-SELECTED_PLUGINS[$#@SELECTED_PLUGINS[@]}]="protocols"
+SELECTED_PLUGINS[${#SELECTED_PLUGINS[@]}]="protocols"
 
 
 for plugin_name in ${SELECTED_PLUGINS[@]}
@@ -25,8 +25,8 @@ do
   plugin_xcodeproj="${plugin_path}/proj.ios/$(ls ${plugin_path}/proj.ios/ | grep xcodeproj)"
   plugin_header_paths="${plugin_path}/include"
 
-
-  ./xcodemodifier/xcodemod --addsubp --subpath ${plugin_xcodeproj} --header_paths ${plugin_header_paths}  --pbxproj ${GAME_PROJECT_PBXPROJ_FILE}
+  ./toolsForGame/addIOSPlugin.py ${plugin_xcodeproj} ${GAME_PROJECT_PBXPROJ_FILE}
+  #./xcodemodifier/xcodemod --addsubp --subpath ${plugin_xcodeproj} --header_paths ${plugin_header_paths}  --pbxproj ${GAME_PROJECT_PBXPROJ_FILE}
 done
 
 
