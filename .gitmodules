@@ -1,0 +1,3 @@
+[submodule "tools/xcodemodifier"]
+	path = tools/xcodemodifier
+	url = git@github.com:junwchina/mod-pbxproj.git
