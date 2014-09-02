@@ -13,6 +13,10 @@ OPTIONS:
 EOF
 }
 
+updatePlugin()
+{
+}
+
 check_requirements()
 {
   type gawk >/dev/null 2>&1 || { echo >&2 "gawk is required, PLZ install it first."; exit 1; }

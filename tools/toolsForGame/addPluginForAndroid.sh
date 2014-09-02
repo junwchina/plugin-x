@@ -4,10 +4,7 @@ GAME_PROJECT_DIR=$1
 SELECTED_PLUGINS=(${2//:/ })
 
 # if project path is end with '/', delete it
-END_CHAR=${GAME_PROJECT_DIR:$((${#GAME_PROJECT_DIR}-1)):1}
-if [ ${END_CHAR} = "/" ]; then
-    GAME_PROJECT_DIR=${GAME_PROJECT_DIR%/}
-fi
+GAME_PROJECT_DIR=${GAME_PROJECT_DIR%/}
 
 # check the game project path
 if [ -d "${GAME_PROJECT_DIR}" -a -f "${GAME_PROJECT_DIR}/AndroidManifest.xml" ]; then
